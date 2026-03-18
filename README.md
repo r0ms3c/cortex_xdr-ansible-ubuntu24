@@ -56,14 +56,14 @@ dpkg -l | grep cortex
 
 ## Repository layout
 ```
-cortex-xdr-ansible-ubuntu24/
+cortex_xdr-ansible-ubuntu24/
 ├── inventory.ini
 ├── playbooks/
 │   └── deploy_xdr.yml
 └── roles/
     └── cortex_xdr/
         ├── files/
-        │   └── cortex-agent.deb (PLACEHOLDER path; not commit on github)
+        │   └── cortex-agent.deb
         └── tasks/
             └── main.yml
 ```

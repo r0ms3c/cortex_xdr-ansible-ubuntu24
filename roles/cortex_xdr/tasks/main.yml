@@ -1,0 +1,60 @@
+---
+- name: Ensure base packages exist
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - openssl
+    state: present
+    update_cache: true
+
+- name: Ensure /etc/panw exists
+  ansible.builtin.file:
+    path: /etc/panw
+    state: directory
+    mode: "0755"
+
+- name: Write cortex.conf (static, same for all hosts)
+  ansible.builtin.copy:
+    dest: /etc/panw/cortex.conf
+    mode: "0644"
+    content: |
+      --proxy-list "broker.company.local:8888"
+      --endpoint-tags "ubuntu,server,prod"
+      --install-path=/opt/traps
+      # Uncomment the next line to force user-space (no kernel module)
+      # --no-km
+
+# Copy the Ubuntu .deb that you downloaded from the Cortex XDR console
+- name: Copy Cortex XDR .deb installer to target
+  ansible.builtin.copy:
+    src: cortex-agent.deb
+    dest: /tmp/cortex-agent.deb
+    mode: "0755"
+
+# Install the agent using apt from local .deb (supported on Ubuntu/Debian)
+- name: Install Cortex XDR Agent (DEB)
+  ansible.builtin.apt:
+    deb: /tmp/cortex-agent.deb
+  register: xdr_install
+
+- name: Ensure Cortex XDR service is enabled and running
+  ansible.builtin.systemd:
+    name: traps_pmd.service
+    state: started
+    enabled: true
+
+# Optional: show service status and cytool location
+- name: Show service status
+  ansible.builtin.command: systemctl status traps_pmd.service
+  changed_when: false
+  register: svc
+- ansible.builtin.debug:
+    var: svc.stdout
+
+- name: Check cytool path (optional)
+  ansible.builtin.stat:
+    path: /opt/traps/bin/cytool
+  register: cytool
+- ansible.builtin.debug:
+    msg: "cytool present at /opt/traps/bin/cytool"
+  when: cytool.stat.exists

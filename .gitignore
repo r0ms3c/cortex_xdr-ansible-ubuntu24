@@ -1,0 +1,6 @@
+# Ignore installers and archives
+roles/cortex_xdr/files/*.deb
+roles/cortex_xdr/files/*.rpm
+roles/cortex_xdr/files/*.sh
+*.tar.gz
+*.zip

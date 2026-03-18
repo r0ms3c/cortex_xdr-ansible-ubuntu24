@@ -1,0 +1,7 @@
+---
+- name: Install Cortex XDR Agent
+  hosts: ubuntu_2404
+  become: true
+
+  roles:
+    - role: cortex_xdr

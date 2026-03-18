@@ -69,7 +69,7 @@ cortex-xdr-ansible-ubuntu24/
 ```
 
 ## References
-- Install the Cortex XDR Agent for Linux — Administrator Guide: https://docs-cortex.paloaltonetworks.com/r/Cortex-XDR/9.0/Cortex-XDR-Agent-Administrator-Guide/Install-the-Cortex-XDR-Agent-for-Linux
+- Install the Cortex XDR Agent for Linux — Administrator Guide: [https://docs-cortex.paloaltonetworks.com/r/Cortex-XDR/9.1/Cortex-XDR-Agent-Administrator-Guide/Install-the-Cortex-XDR-Agent-for-Linux](https://docs-cortex.paloaltonetworks.com/r/Cortex-XDR/9.1/Cortex-XDR-Agent-Administrator-Guide/Cortex-XDR-Agent-for-Linux)
 - Cortex XDR — Linux Compatibility Matrix: https://docs-cortex.paloaltonetworks.com/r/Cortex-XDR/Cortex-XDR-Compatibility-Matrix/Linux
 - Post-install proxy configuration via `cytool` (Broker VM/proxy): https://live.paloaltonetworks.com/t5/general-topics/how-to-install-a-cortex-xdr-agent-communicating-through-the-palo/td-p/1000112
 

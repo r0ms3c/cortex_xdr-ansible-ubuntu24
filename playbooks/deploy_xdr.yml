@@ -2,6 +2,15 @@
 - name: Install Cortex XDR Agent
   hosts: ubuntu_2404
   become: true
+  become_method: sudo
+
+  vars_prompt:
+    - name: vault_become_password
+      prompt: "Enter sudo (become) password"
+      private: yes
+      
+  vars:
+    ansible_become_password: "{{ vault_become_password }}"
 
   roles:
     - role: cortex_xdr

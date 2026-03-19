@@ -12,17 +12,23 @@
     path: /etc/panw
     state: directory
     mode: "0755"
+    
+- name: Ensure install directory exist
+  ansible.builtin.file:
+    path: /opt/traps
+    state: directory
+    group: root
+    mode: "0755"
 
 - name: Write cortex.conf (static, same for all hosts)
   ansible.builtin.copy:
     dest: /etc/panw/cortex.conf
     mode: "0644"
     content: |
+      --distribution-id "YOUR DISTRIBUTION ID"
+      --distribution-server "https://distributions.traps.paloaltonetworks.com/"
       --proxy-list "broker.company.local:8888"
-      --endpoint-tags "ubuntu,server,prod"
-      --install-path=/opt/traps
-      # Uncomment the next line to force user-space (no kernel module)
-      # --no-km
+      --endpoint-tags "ubuntu,server,prod" 
 
 # Copy the Ubuntu .deb that you downloaded from the Cortex XDR console
 - name: Copy Cortex XDR .deb installer to target
